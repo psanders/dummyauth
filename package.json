@@ -1,0 +1,22 @@
+{
+  "name": "dummyauth",
+  "version": "1.0.0",
+  "description": "Dummy digest authentication service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "digest",
+    "sip",
+    "auth"
+  ],
+  "author": "Pedro Sanders",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.5.5",
+    "@grpc/proto-loader": "^0.6.9",
+    "express": "^4.17.3",
+    "md5hex": "^1.0.0"
+  }
+}

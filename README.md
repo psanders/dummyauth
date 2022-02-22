@@ -2,7 +2,7 @@
 
 ## Install and run
 
-Run the following command to install and run the service
+Use the following command to install and run the service
 
 ```
 npm install
@@ -11,7 +11,7 @@ node index
 
 ## Testing
 
-Use BloomRPC or postman to test the service. Use the following information for testing:
+Use the following information for testing:
 
 _GRPC Request_
 
@@ -35,4 +35,5 @@ _Endpoint Credentials_
 USERNAME=arc
 SECRET=1234
 ```
-# dummyauth
+
+> Use BloomRPC or Postman to speed up testing
