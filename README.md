@@ -1,6 +1,6 @@
-# Dummy Digest Authentication Service
+Dummy Digest Authentication Service
 
-## Install and run
+### Install and run
 
 Use the following command to install and run the service
 
@@ -9,7 +9,7 @@ npm install
 node index
 ```
 
-## Testing
+### Testing
 
 Use the following information for testing:
 
