@@ -1,0 +1,57 @@
+syntax = "proto3";
+package camanio.sip.auth.v1;
+option csharp_namespace = "SmartCare.SipAuthentication.Protos.v1";
+
+service DigestAuthentication {
+  rpc Authenticate (AuthenticationRequest) returns (AuthenticationResponse) {}
+}
+
+// Please see https://httpwg.org/specs/rfc7616.html#rfc.abstract for more info
+message AuthenticationRequest {
+  // The user's name in the specified realm.
+  string username = 1;
+
+  // This string should contain at least the name of the host performing 
+  // the authentication and might additionally indicate the collection of 
+  // users who might have access. An example is "registered_users@example.com". 
+  string realm = 2;
+
+  // A server-specified string which should be uniquely generated 
+  // each time a 401 response is made
+  string nonce = 3;
+
+  // The Effective Request URI 
+  string uri = 4;
+
+  // The method of the request (e.g REGISTER, INVITE, etc.)
+  string method = 5;
+
+  // Indicates the "quality of protection" options applied to the response by the server.
+  string qop = 6;
+
+  // Challenge response
+  string response = 7;
+
+  // A string of data, specified by the server, that SHOULD be returned by the client 
+  // unchanged in the Authorization header field of subsequent requests with URIs in the 
+  // same protection space.
+  string opaque = 8;
+
+  // The cnonce value is an opaque quoted ASCII-only string value provided by the 
+  // client and used by both client and server to avoid chosen plaintext attacks.
+  string c_nonce = 9;
+
+  // A string indicating a pair of algorithms used to produce the digest
+  // and a checksum. If this is not present it is assumed to be "MD5".
+  string algorithm = 10;
+
+  // The nc value is the hexadecimal count of the number of requests 
+  // (including the current request) that the client has sent with the nonce value 
+  // in this request. 
+  string nonce_count = 11;
+}
+
+message AuthenticationResponse {
+  // True if authenticated successfully, otherwise false
+  bool is_valid = 1;
+}

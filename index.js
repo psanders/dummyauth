@@ -1,4 +1,4 @@
-const PROTO_PATH = __dirname + '/auth.proto';
+const PROTO_PATH = __dirname + '/digest.proto';
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const calculateResponse = require("./util")
@@ -14,9 +14,9 @@ const packageDefinition = protoLoader.loadSync(
   });
 
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const auth = protoDescriptor.camanio.sip.auth.v1draft1;
+const auth = protoDescriptor.camanio.sip.auth.v1;
 
-function verifyAuth(call, callback) {
+function authenticate(call, callback) {
   console.log(JSON.stringify(call.request, null, ' '))
 
   // Obtain this from your authentication system
@@ -31,13 +31,13 @@ function verifyAuth(call, callback) {
 
   const valid = response === call.request.response
 
-  callback(null, { valid })
+  callback(null, { is_valid: valid})
 }
 
 // Setup and start grpc server
 const credentials = grpc.ServerCredentials.createInsecure()
 const server = new grpc.Server()
-server.addService(auth.DigestAuth.service, { verifyAuth })
+server.addService(auth.DigestAuthentication.service, { authenticate })
 server.bindAsync("0.0.0.0:50052", credentials, () => {
   console.log(`starting authentication service`)
   server.start()
